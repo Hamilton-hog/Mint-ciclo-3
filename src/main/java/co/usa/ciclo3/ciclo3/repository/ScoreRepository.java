@@ -1,10 +1,9 @@
-package usa.mintic.retos.repository;
+package co.usa.ciclo3.ciclo3.repository;
 
+import co.usa.ciclo3.ciclo3.model.Score;
+import co.usa.ciclo3.ciclo3.repository.crud.ScoreCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import usa.mintic.retos.entity.Reservation;
-import usa.mintic.retos.entity.Score;
-import usa.mintic.retos.repository.crud.ScoreCrudRepository;
 
 import java.util.List;
 import java.util.Optional;

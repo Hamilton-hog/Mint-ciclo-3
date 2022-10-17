@@ -24,7 +24,9 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "client")
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
-    private Boolean score=null;
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "reservation")
+    @JsonIgnoreProperties("reservation")
+    private Score score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -74,11 +76,11 @@ public class Reservation implements Serializable {
         this.client = client;
     }
 
-    public Boolean getScore() {
+    public Score getScore() {
         return score;
     }
 
-    public void setScore(Boolean score) {
+    public void setScore(Score score) {
         this.score = score;
     }
 }

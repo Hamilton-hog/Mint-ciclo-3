@@ -1,4 +1,4 @@
-package usa.mintic.retos.entity;
+package co.usa.ciclo3.ciclo3.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
