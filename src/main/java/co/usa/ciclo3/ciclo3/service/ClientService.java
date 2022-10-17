@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.service;
 
+import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.model.Client;
 import co.usa.ciclo3.ciclo3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,38 @@ public class ClientService {
                 return f;
             }
         }
+    }
+    public Client update(Client r){
+        if(r.getIdClient()!=null){
+            Optional<Client> paux= clientRepository.getClient(r.getIdClient());
+            if(!paux.isEmpty()){
+
+                if(r.getEmail()!=null){
+                    paux.get().setEmail(r.getEmail());
+                }
+                if(r.getPassword()!=null){
+                    paux.get().setPassword(r.getPassword());
+                }
+                if(r.getName()!=null){
+                    paux.get().setName(r.getName());
+                }
+                if(r.getAge()!=null){
+                    paux.get().setAge(r.getAge());
+                }
+                clientRepository.save(paux.get());
+                return paux.get();
+            }else{
+                return r;
+            }
+        }else{
+            return r;
+        }
+    }
+    public boolean deleteClient(int IdClient) {
+        Boolean aBoolean = getClient(IdClient).map(client -> {
+            clientRepository.delete(client);
+            return true;
+        }).orElse(false);
+        return aBoolean;
     }
 }

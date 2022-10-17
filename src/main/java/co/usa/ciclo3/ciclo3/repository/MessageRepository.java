@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.repository;
 
+import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.repository.crud.MessageCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,8 @@ public class MessageRepository {
     public Message save(Message p){
         return messageCrudRepository.save(p);
     }
+    public void delete(Message message){
+        messageCrudRepository.delete(message);
+    }
+
 }

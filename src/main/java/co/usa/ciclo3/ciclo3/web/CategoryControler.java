@@ -2,6 +2,7 @@ package co.usa.ciclo3.ciclo3.web;
 
 import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.model.Category;
+import co.usa.ciclo3.ciclo3.model.Reservation;
 import co.usa.ciclo3.ciclo3.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,5 +33,15 @@ public class CategoryControler {
     @ResponseStatus(HttpStatus.CREATED)
     public Category save(@RequestBody Category c){
         return categoryService.save(c);
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody Category c) {
+        return categoryService.update(c);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int Id) {
+        return categoryService.deleteCategory(Id);
     }
 }

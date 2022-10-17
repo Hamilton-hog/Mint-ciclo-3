@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.repository;
 
+import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.model.Client;
 import co.usa.ciclo3.ciclo3.repository.crud.ClientCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,8 @@ public class ClientRepository {
     }
     public Client save(Client f){
         return clientCrudRepository.save(f);
+    }
+    public void delete(Client client){
+        clientCrudRepository.delete(client);
     }
 }
