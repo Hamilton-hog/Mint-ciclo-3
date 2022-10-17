@@ -1,10 +1,17 @@
 package co.usa.ciclo3.ciclo3.service;
 
+import co.usa.ciclo3.ciclo3.model.Client;
 import co.usa.ciclo3.ciclo3.model.Reservation;
+import co.usa.ciclo3.ciclo3.model.dto.StatusAccount;
+import co.usa.ciclo3.ciclo3.model.dto.TopClients;
 import co.usa.ciclo3.ciclo3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,5 +69,40 @@ public class ReservationService {
             return true;
         }).orElse(false);
         return aBoolean;
+    }
+    public List<Reservation> getReservationsByPeriod(String dateA,String dateB){
+        SimpleDateFormat parser=new SimpleDateFormat("yyy-MM=dd");
+        Date a= new Date();
+        Date b=new Date();
+        try{
+            a=parser.parse(dateA);
+            b=parser.parse(dateB);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        if(a.before(b)){
+            return reservationRepository.getDatesReport(a,b);
+        }else{
+            return new ArrayList<Reservation>();
+        }
+    }
+    public StatusAccount getReportByStatus(){
+        List<Reservation> completes=reservationRepository.getStatusReport("completed");
+        List<Reservation> cancelled=reservationRepository.getStatusReport("cancelled");
+        StatusAccount resultado=new StatusAccount(completes.size(),cancelled.size());
+        return resultado;
+
+    }
+    public List<TopClients> getTopclients(){
+        List<TopClients> tc=new ArrayList<>();
+        List<Object[]> result= reservationRepository.getTopClients();
+
+        for(int i=0;i<result.size();i++){
+            int total=Integer.parseInt(result.get(i)[1].toString());
+            Client client= (Client) result.get(i)[0];
+            TopClients topClient=new TopClients(total,client);
+            tc.add(topClient);
+        }
+        return tc;
     }
 }

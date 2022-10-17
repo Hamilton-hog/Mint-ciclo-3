@@ -24,11 +24,11 @@ public class Lib implements Serializable {
     private Category category;
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "lib")
-    @JsonIgnoreProperties("lib")
+    @JsonIgnoreProperties({"lib","client"})
     public List<Message> messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "lib")
-    @JsonIgnoreProperties("lib")
+    @JsonIgnoreProperties({"lib","messages"})
     public List<Reservation> reservations;
 
     public Integer getId() {

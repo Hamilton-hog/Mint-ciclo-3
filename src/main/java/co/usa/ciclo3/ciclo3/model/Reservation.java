@@ -18,7 +18,7 @@ public class Reservation implements Serializable {
     private String status="created";
     @ManyToOne
     @JoinColumn(name = "lib")
-    @JsonIgnoreProperties("reservations")
+    @JsonIgnoreProperties({"reservations","messages"})
     private Lib lib;
     @ManyToOne
     @JoinColumn(name = "client")
